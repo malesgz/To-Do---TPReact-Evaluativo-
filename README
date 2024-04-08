@@ -1,0 +1,9 @@
+# To-Do---TPReact-Evaluativo- 
+
+- Lista de tareas para añadir, borrar, editar y completar utilizando useReducer, 
+useRef junto con otros hooks personalizados (useForm, useTodo).
+
++ useForm: este hook personalizado inicializa el estado del formulario desde el componente TodoAdd para que así los usuarios ingresen nuevas tareas.
++ useEffect: para enfocar en el campo de entrada cuando cambia de false a true.
++ useState: maneja el estado del campo de entrada por si esta habilidado o no.
++ useTodo: maneja el estado y las operaciones relacionadas con las tares para agregar, eliminar, marcar como completadas y luego actualizarlas en el proyecto.

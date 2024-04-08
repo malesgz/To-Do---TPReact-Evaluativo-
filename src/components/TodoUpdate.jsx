@@ -1,46 +1,50 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { useForm } from '../hooks/useForm';
 
 export const TodoUpdate = ({ todo, handleUpdateTodo }) => {
-	const { updateDescription, onInputChange } = useForm({
-		updateDescription: todo.description,
-	});
+    const { updateDescription, onInputChange } = useForm({
+        updateDescription: todo.description,
+    });
 
-	const [disabled, setDisabled] = useState(true);
-	const focusInputRef = useRef();
+    const [disabled, setDisabled] = useState(true);
+    const focusInputRef = useRef();
 
-	const onSubmitUpdate = e => {
-		e.preventDefault();
+    useEffect(() => {
+        if (!disabled) {
+            focusInputRef.current.focus();
+        }
+    }, [disabled]);
 
-		const id = todo.id;
-		const description = updateDescription;
+    const onSubmitUpdate = e => {
+        e.preventDefault();
 
-		handleUpdateTodo(id, description);
+        const id = todo.id;
+        const description = updateDescription;
 
-		setDisabled(!disabled);
+        handleUpdateTodo(id, description);
 
-		focusInputRef.current.focus();
-	};
+        setDisabled(!disabled);
+    };
 
-	return (
-		<form onSubmit={onSubmitUpdate}>
-			<input
-				type='text'
-				className={`input-update ${
-					todo.done ? 'text-decoration-dashed' : ''
-				}`}
-				name='updateDescription'
-				value={updateDescription}
-				onChange={onInputChange}
-				placeholder='¿Qué hay que hacer?'
-				readOnly={disabled}
-				ref={focusInputRef}
-			/>
+    return (
+        <form onSubmit={onSubmitUpdate}>
+            <input
+                type='text'
+                className={`input-update ${
+                    todo.done ? 'text-decoration-dashed' : ''
+                }`}
+                name='updateDescription'
+                value={updateDescription}
+                onChange={onInputChange}
+                placeholder='¿Qué hay que hacer?'
+                readOnly={disabled}
+                ref={focusInputRef}
+            />
 
-			<button className='btn-edit' type='submit'>
-				<FaEdit />
-			</button>
-		</form>
-	);
+            <button className='btn-edit' type='submit'>
+                <FaEdit />
+            </button>
+        </form>
+    );
 };
